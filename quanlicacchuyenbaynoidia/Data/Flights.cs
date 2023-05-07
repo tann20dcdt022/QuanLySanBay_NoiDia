@@ -8,17 +8,61 @@ namespace quanlicacchuyenbaynoidia.Data
 {
     public class Flights
     {
-        public class FightsNode {
+        public class FlightsNode {
             public Flight flight;
-            FightsNode next;
+            public FlightsNode next;
 
-            public FightsNode(Flight flight) 
+            public FlightsNode(Flight flight) 
             { 
                 this.flight = flight;
                 this.next = null;
             }
         }
 
-        public Flights() {}
+        public FlightsNode head;
+        public FlightsNode tail;
+        public int size;
+
+        public Flights() 
+        {
+            this.head = null;
+            this.tail = null;
+            this.size = 0;
+        }
+        
+        public bool isEmpty()
+        {
+            return this.size == 0;
+        }
+
+        public void addFlight(Flight flight) 
+        {
+            FlightsNode newFlight = new FlightsNode(flight);
+            if(this.isEmpty())
+            {
+                this.head = newFlight;
+            } else
+            {
+                FlightsNode ptr = this.head;
+                while(ptr != null)
+                {
+                    ptr = ptr.next;
+                }
+                ptr.next = newFlight;
+            }
+
+            this.tail = newFlight;
+            this.size++;
+        }
+
+        public void editFlight(Flight flight, DateTime ngayGioHieuChinh) 
+        {
+            flight.ngayKhoiHanh = ngayGioHieuChinh;
+        }
+        
+        pubic void cancelFlight(Flight flight)
+        {
+            flight.trangThai = 0;
+        }
     }
 }
